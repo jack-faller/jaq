@@ -1,10 +1,8 @@
-(define-module (jaq)
-  #:use-module (guix gexp)
-  #:use-module (guix packages)
-  #:use-module (guix git-download)
-  #:use-module (guix build-system cargo)
-  #:use-module ((guix licenses) :prefix license:)
-  #:export (jaq lookup-cargo-inputs))
+(use-modules (guix gexp)
+             (guix packages)
+             (guix git-download)
+             (guix build-system cargo)
+             ((guix licenses) :prefix license:))
 
 (define rust-aho-corasick-1.1.4
   (crate-source "aho-corasick" "1.1.4"
@@ -584,7 +582,7 @@
        (sha256
         (base32 "0q813nsym64i3xg925m6f366i9mp97lbp285rmpihi5d890bz5wg"))))
     (build-system cargo-build-system)
-    (inputs (cargo-inputs 'jaq #:module '(jaq)))
+    (inputs (lookup-cargo-inputs 'jaq))
     (arguments (list
                 #:tests? #f
                 #:install-source? #f
